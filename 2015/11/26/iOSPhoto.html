@@ -6,22 +6,25 @@
   <title>iOS相册选取的封装 | FarmGuo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
+1拍照
 
-1拍照2从相册选取">
+2从相册选取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS相册选取的封装">
 <meta property="og:url" content="http://farmkuo.com/2015/11/26/iOSPhoto.html">
 <meta property="og:site_name" content="FarmGuo">
 <meta property="og:description" content="前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
+1拍照
 
-1拍照2从相册选取">
+2从相册选取">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/912738-c665d96d1ab60023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2015-11-26T09:09:15.000Z">
+<meta property="og:updated_time" content="2015-11-26T09:14:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS相册选取的封装">
 <meta name="twitter:description" content="前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
+1拍照
 
-1拍照2从相册选取">
+2从相册选取">
   
     <link rel="alternative" href="/atom.xml" title="FarmGuo" type="application/atom+xml">
   
@@ -94,8 +97,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言">前言</h2><p>照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择</p>
+<p><code>1拍照</code></p>
 <blockquote>
-<p>1拍照<br>2从相册选取<br><a id="more"></a><br>在iOS中选择图片这个任务是通过UIImagePickerController来实现的，通过设置sourceType来决定是从相册选取还是拍照，当前的视图控制器需要实现UIImagePickerControllerDelegate协议的方法。</p>
+<p>2从相册选取<br><a id="more"></a><br>在iOS中选择图片这个任务是通过UIImagePickerController来实现的，通过设置sourceType来决定是从相册选取还是拍照，当前的视图控制器需要实现UIImagePickerControllerDelegate协议的方法。</p>
 <p>imagePickerController:didFinishPickingMediaWithInfo:<br>//用户选择了图片<br>imagePickerControllerDidCancel:<br>//用户取消选择</p>
 </blockquote>
 <p>由于iOS系统的隐私保护机制，无论那种方式都必须先由用户授权否则我们没有权限，结果如下图</p>
