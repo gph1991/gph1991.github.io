@@ -5,21 +5,21 @@
   
   <title>hehe | FarmGuo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
+  <meta name="description" content="前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
 
 1拍照2从相册选取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hehe">
-<meta property="og:url" content="http://farmkuo.com/2015/11/26/hehe.html">
+<meta property="og:url" content="http://farmkuo.com/2015/11/26/iOS状态栏管理.html">
 <meta property="og:site_name" content="FarmGuo">
-<meta property="og:description" content="##前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
+<meta property="og:description" content="前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
 
 1拍照2从相册选取">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/912738-c665d96d1ab60023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2015-11-26T08:43:27.000Z">
+<meta property="og:updated_time" content="2015-11-26T08:51:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hehe">
-<meta name="twitter:description" content="##前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
+<meta name="twitter:description" content="前言照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择
 
 1拍照2从相册选取">
   
@@ -71,9 +71,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hehe" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS状态栏管理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/26/hehe.html" class="article-date">
+    <a href="/2015/11/26/iOS状态栏管理.html" class="article-date">
   <time datetime="2015-11-26T08:32:17.000Z" itemprop="datePublished">2015-11-26</time>
 </a>
     
@@ -93,7 +93,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##前言<br>照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择</p>
+        <h2 id="前言">前言</h2><p>照片的选取在App中是相当普遍的场景，如用户修改头像、上传照片。一般给用户两种选择</p>
 <blockquote>
 <p>1拍照<br>2从相册选取<br><a id="more"></a><br>在iOS中选择图片这个任务是通过UIImagePickerController来实现的，通过设置sourceType来决定是从相册选取还是拍照，当前的视图控制器需要实现UIImagePickerControllerDelegate协议的方法。</p>
 <p>imagePickerController:didFinishPickingMediaWithInfo:<br>//用户选择了图片<br>imagePickerControllerDidCancel:<br>//用户取消选择</p>
@@ -101,7 +101,7 @@
 <p>由于iOS系统的隐私保护机制，无论那种方式都必须先由用户授权否则我们没有权限，结果如下图</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/912738-c665d96d1ab60023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="没有权限"></p>
 <p>1，我们希望这个体验进行优化，2，这个场景很多，我们希望将其模块化,以便复用和拆封ViewController。我们这里只讨论选择一张图片的情况，多选照片的类库代码，现成类库比较多。</p>
-<p>##实现<br>综合来说我们的流程如下：1.弹出视图供用户选择一种方式；2.确定App是否有相应的权限，如果没有，提示用户没有权限并尝试引导用户去设置里面进行授权；3.选择照片返回。注意:UIActionSheet和UIAlertView在iOS9中已经废弃，提倡使用UIAlertController。考虑后期的复用、维护与完善，我们将其进行封装先定义一个ImagePickerModelDelegate协议，用来和视图控制器进行交互。<br>&gt;<br>@protocol ImagePickerModelDelegate<br>-(void)imagePickerDidFinishWithImage:(UIImage<em>)image;<br>-(void)imagePickerDidCancel;<br>//弹出警告框的视图<br>-(UIView</em>)viewControllerView;<br>@end</p>
+<h2 id="实现">实现</h2><p>综合来说我们的流程如下：1.弹出视图供用户选择一种方式；2.确定App是否有相应的权限，如果没有，提示用户没有权限并尝试引导用户去设置里面进行授权；3.选择照片返回。注意:UIActionSheet和UIAlertView在iOS9中已经废弃，提倡使用UIAlertController。考虑后期的复用、维护与完善，我们将其进行封装先定义一个ImagePickerModelDelegate协议，用来和视图控制器进行交互。<br>&gt;<br>@protocol ImagePickerModelDelegate<br>-(void)imagePickerDidFinishWithImage:(UIImage<em>)image;<br>-(void)imagePickerDidCancel;<br>//弹出警告框的视图<br>-(UIView</em>)viewControllerView;<br>@end</p>
 <p>新建NSObject的子类ImagePickerModel，并实现UIImagePickerControllerDelegate和UIActionSheetDelegate协议。声明两个方法</p>
 <blockquote>
 <p>+(id)sharedInstance;<br>-(void)startShowSelectTypeViewWithViewController:(id)viewController andIsEdit:(BOOL)edit;</p>
@@ -116,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://farmkuo.com/2015/11/26/hehe.html" data-id="cihg00iqs00029rs6wdlvyfcc" class="article-share-link">Share</a>
+      <a data-url="http://farmkuo.com/2015/11/26/iOS状态栏管理.html" data-id="cihg04jcw0001aos6f171a1oq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +162,7 @@
       <ul>
         
           <li>
-            <a href="/2015/11/26/hehe.html">hehe</a>
+            <a href="/2015/11/26/iOS状态栏管理.html">hehe</a>
           </li>
         
           <li>
