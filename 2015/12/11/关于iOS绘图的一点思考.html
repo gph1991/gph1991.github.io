@@ -5,16 +5,17 @@
   
   <title>关于iOS绘图的一点思考 | FarmGuo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于iOS绘图的一点思考">
 <meta property="og:url" content="http://farmkuo.com/2015/12/11/关于iOS绘图的一点思考.html">
 <meta property="og:site_name" content="FarmGuo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-12-11T03:51:21.000Z">
+<meta property="og:description" content="在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/912738-0b93d1e793f6fdb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-03-01T10:28:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于iOS绘图的一点思考">
-<meta name="twitter:description">
+<meta name="twitter:description" content="在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。">
   
     <link rel="alternative" href="/atom.xml" title="FarmGuo" type="application/atom+xml">
   
@@ -105,11 +106,36 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。</p>
+<p>###1.UICollectionView的创建<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(instancetype)</span>initWithFrame:<span class="params">(<span class="variable">CGRect</span>)</span>frame collectionViewLayout:<span class="params">(<span class="variable">UICollectionViewLayout</span> *)</span>layout</span></span><br></pre></td></tr></table></figure></p>
+<p>UICollectionView的创建过程基本和UITableView类似，alloc后init，设置dataSource代理和delegate代理，并添加到当前view上。不同于UITableView初始化时一般要指定UITableViewStyle,UICollectionView初始化使指定的是UICollectionViewLayout对象。这个对象保存了关于UICollectionView的布局信息。其主要属性有</p>
+<blockquote>
+<p>@property (nonatomic) CGFloat minimumLineSpacing;<br>@property (nonatomic) CGFloat minimumInteritemSpacing;<br>@property (nonatomic) CGSize itemSize;<br>@property (nonatomic) UICollectionViewScrollDirection scrollDirection; // default is UICollectionViewScrollDirection<br>@property (nonatomic) UIEdgeInsets sectionInset;</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/912738-0b93d1e793f6fdb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Vertical.png"><br>图为纵向滚动的UICollectionView</p>
+<p>解释一下含义</p>
+<blockquote>
+<p>scrollDirection 方向</p>
+</blockquote>
+<p>默认纵向 </p>
+<blockquote>
+<p>itemSize 即一个Item的大小，蓝色线指示的大小</p>
+</blockquote>
+<p>在UITableView中，Cell一般的宽度是屏幕的宽度，默认高度是44，我们常常是用heightForRowAtIndexPath来确定Cell的大小。</p>
+<blockquote>
+<p>minimumLineSpacing 红色线之间的距离<br>//The minimum spacing to use between lines of items in the grid.</p>
+</blockquote>
+<p>因为UICollectionView可以一行显示多个或者一列显示多个，这个属性用来指示行与行之间的最小距离(纵向)，或者列与列之间的最小距离(横向)。无论横向或者纵向，都可以滚动显示所有内容，所以这个属性可以单独设置。</p>
+<p>注意：这里定义UICollectionView的方向建立在设备在Portrait方向，即正常方向。如果考虑设备转换方向，那么UICollectionView的所有方向都可以看为是纵向。</p>
+<blockquote>
+<p>minimumInteritemSpacing 黄色线之间的距离<br> //The minimum spacing to use between items in the same row.</p>
+</blockquote>
+<p>用来指示同行(纵向)或者同列(横向)的item之间最小距离。在纵向滚动时，屏幕宽度固定，横向滚动时，屏幕的高度固定，故该属性的设置需要考虑itemSize。当设置过大时，布局就会与预期不一致。如在上图的情况下，如果该属性设置过大，导致一行无法放置2个Item，其结果就是每行只有一个Item。        </p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://farmkuo.com/2015/12/11/关于iOS绘图的一点思考.html" data-id="cii1520xi0001sms630ebzazu" class="article-share-link">Share</a>
+      <a data-url="http://farmkuo.com/2015/12/11/关于iOS绘图的一点思考.html" data-id="cil99xnwv00013qs912w9y57m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
@@ -229,7 +255,7 @@ var _hmt = _hmt || [];
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 FarmGuo<br>
+      &copy; 2016 FarmGuo<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
