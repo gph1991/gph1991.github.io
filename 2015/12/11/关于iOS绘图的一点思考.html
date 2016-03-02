@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="FarmGuo">
 <meta property="og:description" content="在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/912738-0b93d1e793f6fdb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-03-01T10:28:00.000Z">
+<meta property="og:updated_time" content="2016-03-02T02:22:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于iOS绘图的一点思考">
 <meta name="twitter:description" content="在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。">
@@ -106,8 +106,8 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。</p>
-<p>###1.UICollectionView的创建<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(instancetype)</span>initWithFrame:<span class="params">(<span class="variable">CGRect</span>)</span>frame collectionViewLayout:<span class="params">(<span class="variable">UICollectionViewLayout</span> *)</span>layout</span></span><br></pre></td></tr></table></figure></p>
+        <p>在iOS开发中，与列表展示相关的，更多的是使用UITableView，几乎每个App都离不开它。对比与UITableView，UICollectionView的使用比较繁琐，所以UICollectionView的使用不是很常见。但UICollectionView也有自身的特点，比如横向布局，多行或者多列(瀑布流)展示。Apple也推荐了一些应用UICollectionView典型场景–相册、书库。<br><a id="more"></a></p>
+<p>##1.UICollectionView的创建<br><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(instancetype)</span>initWithFrame:<span class="params">(<span class="variable">CGRect</span>)</span>frame collectionViewLayout:<span class="params">(<span class="variable">UICollectionViewLayout</span> *)</span>layout</span></span><br></pre></td></tr></table></figure></p>
 <p>UICollectionView的创建过程基本和UITableView类似，alloc后init，设置dataSource代理和delegate代理，并添加到当前view上。不同于UITableView初始化时一般要指定UITableViewStyle,UICollectionView初始化使指定的是UICollectionViewLayout对象。这个对象保存了关于UICollectionView的布局信息。其主要属性有</p>
 <blockquote>
 <p>@property (nonatomic) CGFloat minimumLineSpacing;<br>@property (nonatomic) CGFloat minimumInteritemSpacing;<br>@property (nonatomic) CGSize itemSize;<br>@property (nonatomic) UICollectionViewScrollDirection scrollDirection; // default is UICollectionViewScrollDirection<br>@property (nonatomic) UIEdgeInsets sectionInset;</p>
@@ -135,7 +135,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://farmkuo.com/2015/12/11/关于iOS绘图的一点思考.html" data-id="cil99xnwv00013qs912w9y57m" class="article-share-link">Share</a>
+      <a data-url="http://farmkuo.com/2015/12/11/关于iOS绘图的一点思考.html" data-id="cila7wys900016xfyg6skujqp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
